@@ -51,7 +51,7 @@ const TopNavBar: React.FC = () => {
     { id: 0, name: "profile", icon: <UserCircle /> },
     { id: 1, name: "Security", icon: <Shield /> },
     { id: 2, name: "Settings", icon: <Settings /> },
-    { id: 2, name: "LogOut", icon: <ArrowRightFromLine /> },
+    { id: 3, name: "LogOut", icon: <ArrowRightFromLine /> },
   ];
 
   //handleProfile Click

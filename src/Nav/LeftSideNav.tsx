@@ -67,7 +67,7 @@ const LeftSideNav: React.FC = () => {
           link: "/continuous-control-management",
         },
         {
-          id: 0,
+          id: 1,
           name: "Result Management",
           icon: Result_Management,
           link: "/result-management",
