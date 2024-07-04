@@ -7,7 +7,7 @@ import Notification from "../assets/Top_Nav_Icon/Notification.svg";
 import Profile from "../assets/Top_Nav_Icon/Profile.svg";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useNavContext } from "../Context/NavContext";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRightFromLine, Settings, Shield, UserCircle } from "lucide-react";
 interface INav {
   id: number;
