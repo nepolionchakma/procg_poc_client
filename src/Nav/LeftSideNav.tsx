@@ -3,7 +3,6 @@ import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { FileDown } from "lucide-react";
 import { useNavContext } from "../Context/NavContext";
-import { Finance } from "../assets/Left_Nav_Icon";
 
 interface Nav {
   id: number;
