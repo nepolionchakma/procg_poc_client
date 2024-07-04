@@ -14,6 +14,8 @@ module.exports = {
       menu_active: "#D3E2FD",
       nav: "#F7F8FC",
       "bubble-gum": "#ff77e9",
+      transparent: "transparent",
+      current: "currentColor",
     },
     container: {
       center: true,

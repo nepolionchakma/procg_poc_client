@@ -1,17 +1,26 @@
 import React from "react";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { FileDown } from "lucide-react";
 import { useNavContext } from "../Context/NavContext";
-
-interface Nav {
+import {
+  Finance,
+  Continuous_Control_Management,
+  Continuous_Monitoring,
+  Control_Managment,
+  Issu_Management,
+  Risk_Managment,
+  Result_Management,
+  Tools,
+  Setup_and_Administration,
+} from "../assets/Left_Nav_Icon";
+interface INav {
   id: number;
   label: string;
-  icon: String | React.ReactNode;
+  icon: React.ImgHTMLAttributes<HTMLImageElement> | String | React.ReactNode;
   in_navs?: {
     id: number;
     name: string;
-    icon: String | React.ReactNode;
+    icon: React.ImgHTMLAttributes<HTMLImageElement> | String | React.ReactNode;
     link: string;
   }[];
 }
@@ -20,28 +29,28 @@ const LeftSideNav: React.FC = () => {
   const { collapsed } = useNavContext();
   const location = useLocation();
 
-  const navs: Nav[] = [
+  const navs: INav[] = [
     {
       id: 0,
       label: "Finance",
-      icon: <FileDown />,
+      icon: Finance,
       in_navs: [
         {
           id: 0,
           name: "Risk Management",
-          icon: <FileDown />,
+          icon: Risk_Managment,
           link: "/risk-management",
         },
         {
           id: 1,
           name: "Control Management",
-          icon: <FileDown />,
+          icon: Control_Managment,
           link: "/control-management",
         },
         {
           id: 2,
           name: "Issue Management",
-          icon: <FileDown />,
+          icon: Issu_Management,
           link: "/issue-management",
         },
       ],
@@ -49,9 +58,33 @@ const LeftSideNav: React.FC = () => {
     {
       id: 1,
       label: "Continuous monitoring",
-      icon: <FileDown />,
+      icon: Continuous_Monitoring,
       in_navs: [
-        { id: 0, name: "Risk Management", icon: <FileDown />, link: "/" },
+        {
+          id: 0,
+          name: "Continuous Control Management",
+          icon: Continuous_Control_Management,
+          link: "/continuous-control-management",
+        },
+        {
+          id: 0,
+          name: "Result Management",
+          icon: Result_Management,
+          link: "/result-management",
+        },
+      ],
+    },
+    {
+      id: 2,
+      label: "Tools",
+      icon: Tools,
+      in_navs: [
+        {
+          id: 0,
+          name: "Setup and Administration",
+          icon: Setup_and_Administration,
+          link: "/setup-and-administration",
+        },
       ],
     },
   ];
@@ -80,12 +113,27 @@ const LeftSideNav: React.FC = () => {
             <Menu transitionDuration={600}>
               {navs.map((nav) => (
                 <div key={nav.id}>
-                  <SubMenu icon={nav.icon} label={nav.label}>
+                  <SubMenu
+                    icon={
+                      <img
+                        className="h-6 w-6"
+                        src={nav.icon as string}
+                        alt="icon"
+                      />
+                    }
+                    label={nav.label}
+                  >
                     {nav.in_navs?.map((in_nav) => (
                       <MenuItem
                         key={in_nav.id}
                         component={<NavLink to={in_nav.link} />}
-                        icon={in_nav.icon}
+                        icon={
+                          <img
+                            className="h-6 w-6"
+                            src={in_nav.icon as string}
+                            alt="icon"
+                          />
+                        }
                         style={getMenuItemStyle(in_nav.link)}
                         className={getMenuItemClassName(in_nav.link)}
                       >
@@ -96,8 +144,8 @@ const LeftSideNav: React.FC = () => {
                 </div>
               ))}
 
-              <MenuItem>Documentation</MenuItem>
-              <MenuItem>Calendar</MenuItem>
+              {/* <MenuItem>Documentation</MenuItem>
+              <MenuItem>Calendar</MenuItem> */}
             </Menu>
           </div>
         </Sidebar>

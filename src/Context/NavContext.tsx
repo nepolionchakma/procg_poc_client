@@ -8,6 +8,7 @@ interface NavTypes {
   active_url: string;
   setActive_url: React.Dispatch<React.SetStateAction<string>>;
 }
+
 export const NavContext = createContext<NavTypes | null>(null);
 export const useNavContext = () => {
   const navConsumer = useContext(NavContext);
@@ -16,6 +17,7 @@ export const useNavContext = () => {
   }
   return navConsumer;
 };
+
 export const NavContextProvider = ({ children }: NavProviderProps) => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const [active_url, setActive_url] = useState<string>("");

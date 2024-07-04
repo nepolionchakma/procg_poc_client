@@ -9,6 +9,9 @@ import Home from "./Pages/Home";
 import Risk_Management from "./Pages/Risk_Management";
 import Control_Management from "./Pages/Control_Management";
 import Issue_Management from "./Pages/Issue_Management";
+import Setup_and_Administration from "./Pages/Setup_and_Administration";
+import Result_Management from "./Pages/Result_Management";
+import Continuous_Control_Management from "./Pages/Continuous_Control_Management";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +45,18 @@ const router = createBrowserRouter([
       {
         path: "/issue-management",
         element: <Issue_Management />,
+      },
+      {
+        path: "/continuous-control-management",
+        element: <Continuous_Control_Management />,
+      },
+      {
+        path: "/result-management",
+        element: <Result_Management />,
+      },
+      {
+        path: "/setup-and-administration",
+        element: <Setup_and_Administration />,
       },
     ],
   },
