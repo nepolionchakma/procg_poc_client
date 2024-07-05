@@ -24,6 +24,7 @@ interface IProfile {
 const TopNavBar: React.FC = () => {
   const { collapsed, setCollapsed } = useNavContext();
   const [isOpenProfile, setIsOpenProfile] = useState<boolean>(false);
+  const [activeUrl, setActiveUrl] = useState<number>();
 
   //set collapsed in localstorage
   useEffect(() => {
@@ -36,10 +37,23 @@ const TopNavBar: React.FC = () => {
 
     setCollapsed(booleanValue);
   }, []);
+  //set activeURL in localstorage
+  useEffect(() => {
+    const storedValue = localStorage.getItem("activeUrl");
+    if (storedValue !== null) {
+      setActiveUrl(JSON.parse(storedValue));
+    } else {
+      setActiveUrl(0);
+    }
+  }, []);
 
   const handleCollapsed = () => {
     setCollapsed(!collapsed);
     localStorage.setItem("isCollapsed", JSON.stringify(!collapsed));
+  };
+  const handleActiveURL = (id: number) => {
+    setActiveUrl(id);
+    localStorage.setItem("activeUrl", JSON.stringify(id));
   };
   const navs: INav[] = [
     { id: 0, name: "Home", icon: Home, link: "/" },
@@ -69,7 +83,7 @@ const TopNavBar: React.FC = () => {
           </div>
         </div>
         <div>
-          <Link to="/">
+          <Link to="/" onClick={() => handleActiveURL(0)}>
             <img src={Logo} alt="" />
           </Link>
         </div>
@@ -78,6 +92,24 @@ const TopNavBar: React.FC = () => {
       <div className="flex gap-7 items-center">
         {navs.map((nav) => (
           <div key={nav.id} className="flex items-center justify-center">
+            <NavLink
+              to={nav.link}
+              onClick={() => handleActiveURL(nav.id)}
+              className={`${activeUrl === nav.id && "bg-menu_active rounded"}`}
+            >
+              <div
+                className={`flex items-center justify-center gap-3 px-5 py-[10px] rounded-md duration-300 `}
+              >
+                <img className="h-5 w-5" src={nav.icon as string} alt="" />
+                <span>{nav.name === "Profile" ? "" : nav.name}</span>
+              </div>
+            </NavLink>
+            {/* I see in the UI Screen, Home option is also showing selected along
+            with an option from the Side NavMenu bar - which is not reflecting
+            the correct visual effect. Please put the Side Navigation Menu
+            hierarchy in a JSON file and render from there so it is easier to
+            modify in that file when we like to change it - let me know if you
+            need any clarification.
             <NavLink to={nav.link}>
               {({ isActive, isTransitioning }) => (
                 <div
@@ -89,7 +121,7 @@ const TopNavBar: React.FC = () => {
                   <span>{nav.name === "Profile" ? "" : nav.name}</span>
                 </div>
               )}
-            </NavLink>
+            </NavLink> */}
           </div>
         ))}
         <div className="relative">
