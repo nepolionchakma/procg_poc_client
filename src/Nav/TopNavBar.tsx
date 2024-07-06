@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Logo from "../assets/Top_Nav_Icon/Logo.svg";
 import Home from "../assets/Top_Nav_Icon/Home.svg";
 import Alerts from "../assets/Top_Nav_Icon/Alert.svg";
@@ -24,7 +24,10 @@ interface IProfile {
 const TopNavBar: React.FC = () => {
   const { collapsed, setCollapsed } = useNavContext();
   const [isOpenProfile, setIsOpenProfile] = useState<boolean>(false);
-  const [activeUrl, setActiveUrl] = useState<number>();
+  // const [activeUrl, setActiveUrl] = useState<number>();
+
+  // const pathLocation = useLocation();
+  // console.log(pathLocation.pathname, "Path Location");
 
   //set collapsed in localstorage
   useEffect(() => {
@@ -38,34 +41,41 @@ const TopNavBar: React.FC = () => {
     setCollapsed(booleanValue);
   }, []);
   //set activeURL in localstorage
-  useEffect(() => {
-    const storedValue = localStorage.getItem("activeUrl");
-    if (storedValue !== null) {
-      setActiveUrl(JSON.parse(storedValue));
-    } else {
-      setActiveUrl(0);
-    }
-  }, []);
+  useEffect(() => {}, []);
+
+  // useEffect(() => {
+  //   const storedValue = localStorage.getItem("activeUrl");
+  //   if (storedValue !== null) {
+  //     setActiveUrl(JSON.parse(storedValue));
+  //   } else {
+  //     setActiveUrl(0);
+  //   }
+  // }, []);
 
   const handleCollapsed = () => {
     setCollapsed(!collapsed);
     localStorage.setItem("isCollapsed", JSON.stringify(!collapsed));
   };
-  const handleActiveURL = (id: number) => {
-    setActiveUrl(id);
-    localStorage.setItem("activeUrl", JSON.stringify(id));
-  };
+  // const handleActiveURL = (id: number) => {
+  //   setActiveUrl(id);
+  //   localStorage.setItem("activeUrl", JSON.stringify(id));
+  // };
   const navs: INav[] = [
     { id: 0, name: "Home", icon: Home, link: "/" },
     { id: 1, name: "Alerts", icon: Alerts, link: "/alerts" },
-    { id: 2, name: "Task", icon: Tasks, link: "/task" },
-    { id: 3, name: "Notification", icon: Notification, link: "/notification" },
+    { id: 2, name: "Tasks", icon: Tasks, link: "/tasks" },
+    {
+      id: 3,
+      name: "Notifications",
+      icon: Notification,
+      link: "/notifications",
+    },
   ];
   const profile: IProfile[] = [
     { id: 0, name: "profile", icon: <UserCircle /> },
     { id: 1, name: "Security", icon: <Shield /> },
     { id: 2, name: "Settings", icon: <Settings /> },
-    { id: 3, name: "LogOut", icon: <ArrowRightFromLine /> },
+    { id: 3, name: "Logout", icon: <ArrowRightFromLine /> },
   ];
 
   //handleProfile Click
@@ -83,7 +93,7 @@ const TopNavBar: React.FC = () => {
           </div>
         </div>
         <div>
-          <Link to="/" onClick={() => handleActiveURL(0)}>
+          <Link to="/">
             <img src={Logo} alt="" />
           </Link>
         </div>
@@ -92,10 +102,13 @@ const TopNavBar: React.FC = () => {
       <div className="flex gap-7 items-center">
         {navs.map((nav) => (
           <div key={nav.id} className="flex items-center justify-center">
+            {/*
+              where i solve
             <NavLink
               to={nav.link}
-              onClick={() => handleActiveURL(nav.id)}
-              className={`${activeUrl === nav.id && "bg-menu_active rounded"}`}
+              className={`${
+                pathLocation.pathname === nav.link && "bg-menu_active rounded"
+              }`}
             >
               <div
                 className={`flex items-center justify-center gap-3 px-5 py-[10px] rounded-md duration-300 `}
@@ -104,12 +117,7 @@ const TopNavBar: React.FC = () => {
                 <span>{nav.name === "Profile" ? "" : nav.name}</span>
               </div>
             </NavLink>
-            {/* I see in the UI Screen, Home option is also showing selected along
-            with an option from the Side NavMenu bar - which is not reflecting
-            the correct visual effect. Please put the Side Navigation Menu
-            hierarchy in a JSON file and render from there so it is easier to
-            modify in that file when we like to change it - let me know if you
-            need any clarification.
+              */}
             <NavLink to={nav.link}>
               {({ isActive, isTransitioning }) => (
                 <div
@@ -121,7 +129,7 @@ const TopNavBar: React.FC = () => {
                   <span>{nav.name === "Profile" ? "" : nav.name}</span>
                 </div>
               )}
-            </NavLink> */}
+            </NavLink>
           </div>
         ))}
         <div className="relative">
