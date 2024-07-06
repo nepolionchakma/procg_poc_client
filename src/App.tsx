@@ -27,11 +27,11 @@ const router = createBrowserRouter([
         element: <Alerts />,
       },
       {
-        path: "/task",
+        path: "/tasks",
         element: <Task />,
       },
       {
-        path: "/notification",
+        path: "/notifications",
         element: <Notification />,
       },
       {

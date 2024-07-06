@@ -16,6 +16,7 @@ module.exports = {
       "bubble-gum": "#ff77e9",
       transparent: "transparent",
       current: "currentColor",
+      url: "#0B8AEF",
     },
     container: {
       center: true,

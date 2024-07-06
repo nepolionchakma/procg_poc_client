@@ -84,13 +84,14 @@ const TopNavBar: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-between px-5 py-3 border shadow-lg bg-nav sticky top-0">
+    <div className="flex justify-between px-5 py-2 border shadow-lg bg-nav sticky top-0">
       {/* Left side  */}
       <div className="flex gap-4 items-center justify-center">
-        <div className="bg-menu_collapse cursor-pointer p-1 rounded-full h-9 w-9 flex items-center justify-center">
-          <div onClick={handleCollapsed}>
-            {collapsed ? <FiMenu /> : <FiX />}
-          </div>
+        <div
+          onClick={handleCollapsed}
+          className="hover:bg-menu_collapse cursor-pointer p-1 rounded-full h-9 w-9 flex items-center justify-center"
+        >
+          <div>{collapsed ? <FiMenu /> : <FiX />}</div>
         </div>
         <div>
           <Link to="/">
@@ -102,26 +103,10 @@ const TopNavBar: React.FC = () => {
       <div className="flex gap-7 items-center">
         {navs.map((nav) => (
           <div key={nav.id} className="flex items-center justify-center">
-            {/*
-              where i solve
-            <NavLink
-              to={nav.link}
-              className={`${
-                pathLocation.pathname === nav.link && "bg-menu_active rounded"
-              }`}
-            >
-              <div
-                className={`flex items-center justify-center gap-3 px-5 py-[10px] rounded-md duration-300 `}
-              >
-                <img className="h-5 w-5" src={nav.icon as string} alt="" />
-                <span>{nav.name === "Profile" ? "" : nav.name}</span>
-              </div>
-            </NavLink>
-              */}
             <NavLink to={nav.link}>
               {({ isActive, isTransitioning }) => (
                 <div
-                  className={`flex items-center justify-center gap-3 px-5 py-[10px] rounded-md duration-300 ${
+                  className={`flex items-center justify-center gap-3 px-5 py-[5px] rounded-md duration-300 ${
                     isActive ? "bg-menu_active " : ""
                   } ${isTransitioning ? "slide" : ""}`}
                 >
