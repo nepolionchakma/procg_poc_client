@@ -1,14 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
-import Logo from "../assets/Top_Nav_Icon/Logo.svg";
-import Home from "../assets/Top_Nav_Icon/Home.svg";
-import Alerts from "../assets/Top_Nav_Icon/Alert.svg";
-import Tasks from "../assets/Top_Nav_Icon/Task.svg";
-import Notification from "../assets/Top_Nav_Icon/Notification.svg";
-import Profile from "../assets/Top_Nav_Icon/Profile.svg";
+import Logo from "../../public/Top_Nav_Icon/Logo.svg";
+import Profilea from "../../public/Top_Nav_Icon/Profile.svg";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useNavContext } from "../Context/NavContext";
 import { useEffect, useState } from "react";
-import { ArrowRightFromLine, Settings, Shield, UserCircle } from "lucide-react";
+import { TopNav, Profile } from "./Navs.json";
 interface INav {
   id: number;
   name: string;
@@ -24,12 +20,14 @@ interface IProfile {
 const TopNavBar: React.FC = () => {
   const { collapsed, setCollapsed } = useNavContext();
   const [isOpenProfile, setIsOpenProfile] = useState<boolean>(false);
-  // const [activeUrl, setActiveUrl] = useState<number>();
+  const navs: INav[] = TopNav;
+  const profile: IProfile[] = Profile;
 
+  // const [activeUrl, setActiveUrl] = useState<number>();
   // const pathLocation = useLocation();
   // console.log(pathLocation.pathname, "Path Location");
-
   //set collapsed in localstorage
+
   useEffect(() => {
     function stringToBoolean(value: string | null): boolean {
       return value === "true";
@@ -56,27 +54,6 @@ const TopNavBar: React.FC = () => {
     setCollapsed(!collapsed);
     localStorage.setItem("isCollapsed", JSON.stringify(!collapsed));
   };
-  // const handleActiveURL = (id: number) => {
-  //   setActiveUrl(id);
-  //   localStorage.setItem("activeUrl", JSON.stringify(id));
-  // };
-  const navs: INav[] = [
-    { id: 0, name: "Home", icon: Home, link: "/" },
-    { id: 1, name: "Alerts", icon: Alerts, link: "/alerts" },
-    { id: 2, name: "Tasks", icon: Tasks, link: "/tasks" },
-    {
-      id: 3,
-      name: "Notifications",
-      icon: Notification,
-      link: "/notifications",
-    },
-  ];
-  const profile: IProfile[] = [
-    { id: 0, name: "profile", icon: <UserCircle /> },
-    { id: 1, name: "Security", icon: <Shield /> },
-    { id: 2, name: "Settings", icon: <Settings /> },
-    { id: 3, name: "Logout", icon: <ArrowRightFromLine /> },
-  ];
 
   //handleProfile Click
   const handleProfile = () => {
@@ -117,24 +94,34 @@ const TopNavBar: React.FC = () => {
             </NavLink>
           </div>
         ))}
+
+        {/* User Profile  */}
         <div className="relative">
           <img
             className="cursor-pointer"
-            src={Profile}
+            src={Profilea}
             alt="profile"
             onClick={handleProfile}
           />
         </div>
         {isOpenProfile && (
-          <div className="w-48 bg-menu_active absolute right-2 top-14 rounded flex flex-col py-4 duration-500">
+          <div className="w-48 bg-menu_active absolute right-2 top-14 rounded flex flex-col pb-4 duration-500 p-4 gap-2 ">
+            <div className="flex justify-end px-2">
+              <i
+                onClick={() => setIsOpenProfile(false)}
+                className="fa-solid fa-xmark cursor-pointer rounded-full my-2 "
+              ></i>
+            </div>
             <div className="border-l-[15px] border-l-transparent border-b-[25px] border-b-menu_active border-r-[15px] border-r-transparent absolute right-3 -top-4 duration-500 transition-transform" />
 
             {profile.map((p) => (
               <div
                 key={p.id}
-                className="flex gap-3 p-2 hover:bg-menu_collapse border cursor-pointer"
+                className="flex gap-3 p-3 hover:bg-menu_collapse border cursor-pointer rounded-xl"
               >
-                <div>{p.icon as string}</div>
+                <div>
+                  <i className={`fa-solid ${p.icon}`}></i>
+                </div>
                 <span>{p.name}</span>
               </div>
             ))}

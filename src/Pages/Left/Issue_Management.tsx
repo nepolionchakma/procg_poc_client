@@ -1,4 +1,8 @@
 const Issue_Management = () => {
-  return <div>Issue_Management</div>;
+  return (
+    <div className="w-full h-full flex items-center justify-center ">
+      Issue_Management
+    </div>
+  );
 };
 export default Issue_Management;

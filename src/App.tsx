@@ -35,27 +35,27 @@ const router = createBrowserRouter([
         element: <Notification />,
       },
       {
-        path: "/risk-management",
+        path: "/finance/risk-management",
         element: <Risk_Management />,
       },
       {
-        path: "/control-management",
+        path: "/finance/control-management",
         element: <Control_Management />,
       },
       {
-        path: "/issue-management",
+        path: "/finance/issue-management",
         element: <Issue_Management />,
       },
       {
-        path: "/continuous-control-management",
+        path: "/Continuous-Monitoring/continuous-control-management",
         element: <Continuous_Control_Management />,
       },
       {
-        path: "/result-management",
+        path: "/Continuous-Monitoring/result-management",
         element: <Result_Management />,
       },
       {
-        path: "/setup-and-administration",
+        path: "/tools/setup-and-administration",
         element: <Setup_and_Administration />,
       },
     ],

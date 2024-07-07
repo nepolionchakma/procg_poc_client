@@ -1,0 +1,109 @@
+{
+  "LeftNav": [
+    {
+      "id": 0,
+      "label": "Finance",
+      "icon": "../../public/Left_Nav_Icon/Finance.png",
+      "in_navs": [
+        {
+          "id": 0,
+          "name": "Risk Management",
+          "icon": "../../public/Left_Nav_Icon/Risk Management.png",
+          "link": "/finance/risk-management"
+        },
+        {
+          "id": 1,
+          "name": "Control Management",
+          "icon": "../../public/Left_Nav_Icon/Control Management.png",
+          "link": "/finance/control-management"
+        },
+        {
+          "id": 2,
+          "name": "Issue Management",
+          "icon": "../../public/Left_Nav_Icon/Issue Management.png",
+          "link": "/finance/issue-management"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "label": "Continuous Monitoring",
+      "icon": "../../public/Left_Nav_Icon/Continuous Monitoring.png",
+      "in_navs": [
+        {
+          "id": 0,
+          "name": "Continuous Control Management",
+          "icon": "../../public/Left_Nav_Icon/Continuous Control Management.png",
+          "link": "/Continuous-Monitoring/continuous-control-management"
+        },
+        {
+          "id": 1,
+          "name": "Result Management",
+          "icon": "../../public/Left_Nav_Icon/Result Management.png",
+          "link": "/Continuous-Monitoring/result-management"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "label": "Tools",
+      "icon": "../../public/Left_Nav_Icon/Tools.png",
+      "in_navs": [
+        {
+          "id": 0,
+          "name": "Setup and Administration",
+          "icon": "../../public/Left_Nav_Icon/Setup and Administration.png",
+          "link": "tools/setup-and-administration"
+        }
+      ]
+    }
+  ],
+  "TopNav": [
+    {
+      "id": 0,
+      "name": "Home",
+      "icon": "../../public/Top_Nav_Icon/Home.svg",
+      "link": "/"
+    },
+    {
+      "id": 1,
+      "name": "Alerts",
+      "icon": "../../public/Top_Nav_Icon/Alerts.svg",
+      "link": "/alerts"
+    },
+    {
+      "id": 2,
+      "name": "Tasks",
+      "icon": "../../public/Top_Nav_Icon/Tasks.svg",
+      "link": "/tasks"
+    },
+    {
+      "id": 3,
+      "name": "Notifications",
+      "icon": "../../public/Top_Nav_Icon/Notification.svg",
+      "link": "/notifications"
+    }
+  ],
+  "Profile": [
+    {
+      "id": 0,
+      "name": "Profile",
+      "icon": "fa-user"
+    },
+    {
+      "id": 1,
+      "name": "Security",
+      "icon": "fa-shield-halved"
+    },
+    {
+      "id": 2,
+      "name": "Settings",
+      "icon": "fa-gear"
+    },
+    {
+      "id": 3,
+      "name": "Logout",
+      "icon": "fa-right-from-bracket"
+    }
+  ]
+}

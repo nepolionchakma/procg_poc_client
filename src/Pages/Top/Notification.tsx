@@ -1,4 +1,8 @@
 const Notification = () => {
-  return <div>Notification</div>;
+  return (
+    <div className="w-full h-full flex items-center justify-center ">
+      Notification
+    </div>
+  );
 };
 export default Notification;
