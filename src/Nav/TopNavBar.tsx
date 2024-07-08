@@ -57,7 +57,7 @@ const TopNavBar: React.FC = () => {
         </div>
         <div>
           <Link to="/">
-            <img src={Logo} alt="Logo" className="w-36" />
+            <img src={Logo} alt="Logo" className="w-28" />
           </Link>
         </div>
       </div>
