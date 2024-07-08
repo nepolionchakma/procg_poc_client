@@ -47,11 +47,11 @@ const router = createBrowserRouter([
         element: <Issue_Management />,
       },
       {
-        path: "/Continuous-Monitoring/continuous-control-management",
+        path: "/continuous-monitoring/continuous-control-management",
         element: <Continuous_Control_Management />,
       },
       {
-        path: "/Continuous-Monitoring/result-management",
+        path: "/continuous-monitoring/result-management",
         element: <Result_Management />,
       },
       {

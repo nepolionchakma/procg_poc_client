@@ -34,13 +34,13 @@
           "id": 0,
           "name": "Continuous Control Management",
           "icon": "../../public/Left_Nav_Icon/Continuous Control Management.png",
-          "link": "/Continuous-Monitoring/continuous-control-management"
+          "link": "/continuous-monitoring/continuous-control-management"
         },
         {
           "id": 1,
           "name": "Result Management",
           "icon": "../../public/Left_Nav_Icon/Result Management.png",
-          "link": "/Continuous-Monitoring/result-management"
+          "link": "/continuous-monitoring/result-management"
         }
       ]
     },

@@ -1,14 +1,17 @@
-import LeftSideNav from "../Nav/LeftSideNav";
-import TopNavBar from "../Nav/TopNavBar";
+import Bottom from "../HomeView/Bottom";
+import Top from "../HomeView/Top";
 
 const Root = () => {
   return (
-    <>
+    <main>
+      {/* Home View  */}
       <div className="flex flex-col">
-        <TopNavBar />
-        <LeftSideNav />
+        {/* Top  */}
+        <Top />
+        {/* Bottom  */}
+        <Bottom />
       </div>
-    </>
+    </main>
   );
 };
 export default Root;

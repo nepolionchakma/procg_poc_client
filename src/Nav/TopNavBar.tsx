@@ -5,28 +5,25 @@ import { FiMenu, FiX } from "react-icons/fi";
 import { useNavContext } from "../Context/NavContext";
 import { useEffect, useState } from "react";
 import { TopNav, Profile } from "./Navs.json";
+
 interface INav {
   id: number;
   name: string;
-  icon: React.ImgHTMLAttributes<HTMLImageElement> | String | React.ReactNode;
+  icon: React.ImgHTMLAttributes<HTMLImageElement> | string | React.ReactNode;
   link: string;
 }
+
 interface IProfile {
   id: number;
   name: string;
-  icon: React.ImgHTMLAttributes<HTMLImageElement> | String | React.ReactNode;
-  // link: string;
+  icon: React.ImgHTMLAttributes<HTMLImageElement> | string | React.ReactNode;
 }
+
 const TopNavBar: React.FC = () => {
   const { collapsed, setCollapsed } = useNavContext();
   const [isOpenProfile, setIsOpenProfile] = useState<boolean>(false);
   const navs: INav[] = TopNav;
   const profile: IProfile[] = Profile;
-
-  // const [activeUrl, setActiveUrl] = useState<number>();
-  // const pathLocation = useLocation();
-  // console.log(pathLocation.pathname, "Path Location");
-  //set collapsed in localstorage
 
   useEffect(() => {
     function stringToBoolean(value: string | null): boolean {
@@ -37,55 +34,43 @@ const TopNavBar: React.FC = () => {
       stringValue !== null ? stringToBoolean(stringValue) : false;
 
     setCollapsed(booleanValue);
-  }, []);
-  //set activeURL in localstorage
-  useEffect(() => {}, []);
-
-  // useEffect(() => {
-  //   const storedValue = localStorage.getItem("activeUrl");
-  //   if (storedValue !== null) {
-  //     setActiveUrl(JSON.parse(storedValue));
-  //   } else {
-  //     setActiveUrl(0);
-  //   }
-  // }, []);
+  }, [setCollapsed]);
 
   const handleCollapsed = () => {
     setCollapsed(!collapsed);
     localStorage.setItem("isCollapsed", JSON.stringify(!collapsed));
   };
 
-  //handleProfile Click
   const handleProfile = () => {
     setIsOpenProfile(!isOpenProfile);
   };
 
   return (
-    <div className="flex justify-between px-5 py-2 border shadow-lg bg-nav sticky top-0">
+    <div className="flex justify-between px-5 py-2 border shadow-lg bg-nav sticky top-0 z-50">
       {/* Left side  */}
       <div className="flex gap-4 items-center justify-center">
         <div
           onClick={handleCollapsed}
-          className="hover:bg-menu_collapse cursor-pointer p-1 rounded-full h-9 w-9 flex items-center justify-center"
+          className=" bg-menu_collapse hover:bg-menu_active cursor-pointer p-1 rounded-full h-9 w-9 flex items-center justify-center"
         >
           <div>{collapsed ? <FiMenu /> : <FiX />}</div>
         </div>
         <div>
           <Link to="/">
-            <img src={Logo} alt="" />
+            <img src={Logo} alt="Logo" />
           </Link>
         </div>
       </div>
       {/* Right side  */}
-      <div className="flex gap-7 items-center">
+      <div className="flex gap-7 items-center relative">
         {navs.map((nav) => (
           <div key={nav.id} className="flex items-center justify-center">
             <NavLink to={nav.link}>
-              {({ isActive, isTransitioning }) => (
+              {({ isActive, isPending }) => (
                 <div
                   className={`flex items-center justify-center gap-3 px-5 py-[5px] rounded-md duration-300 ${
-                    isActive ? "bg-menu_active " : ""
-                  } ${isTransitioning ? "slide" : ""}`}
+                    isActive ? "bg-menu_active" : ""
+                  } ${isPending ? "slide" : ""}`}
                 >
                   <img className="h-5 w-5" src={nav.icon as string} alt="" />
                   <span>{nav.name === "Profile" ? "" : nav.name}</span>
@@ -105,11 +90,11 @@ const TopNavBar: React.FC = () => {
           />
         </div>
         {isOpenProfile && (
-          <div className="w-48 bg-menu_active absolute right-2 top-14 rounded flex flex-col pb-4 duration-500 p-4 gap-2 ">
+          <div className="w-48 bg-menu_active absolute right-2 top-14 rounded flex flex-col pb-4 duration-500 p-4 gap-2 z-50">
             <div className="flex justify-end px-2">
               <i
                 onClick={() => setIsOpenProfile(false)}
-                className="fa-solid fa-xmark cursor-pointer rounded-full my-2 "
+                className="fa-solid fa-xmark cursor-pointer rounded-full my-2"
               ></i>
             </div>
             <div className="border-l-[15px] border-l-transparent border-b-[25px] border-b-menu_active border-r-[15px] border-r-transparent absolute right-3 -top-4 duration-500 transition-transform" />
@@ -131,4 +116,5 @@ const TopNavBar: React.FC = () => {
     </div>
   );
 };
+
 export default TopNavBar;

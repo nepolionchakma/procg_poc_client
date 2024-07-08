@@ -59,7 +59,7 @@ const LeftSideNav: React.FC = () => {
   }, [path]);
 
   return (
-    <div className="flex gap-5 fixed mt-[54px] w-full">
+    <div className="flex gap-5 fixed mt-[54px] w-full ">
       <div>
         <Sidebar collapsed={collapsed} transitionDuration={1000}>
           <div className="bg-nav h-screen">
@@ -106,7 +106,7 @@ const LeftSideNav: React.FC = () => {
           </div>
         </Sidebar>
       </div>
-      <div className="w-full z-[1]">
+      <div className="w-full">
         <Breadcurmb />
         <Outlet />
       </div>
