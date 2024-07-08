@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import Logo from "../../public/Top_Nav_Icon/Logo.png";
+import Logo from "../../public/Top_Nav_Icon/logo.png";
 import Profilea from "../../public/Top_Nav_Icon/Profile.svg";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useNavContext } from "../Context/NavContext";
