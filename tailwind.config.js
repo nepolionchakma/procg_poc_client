@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -19,14 +18,12 @@ module.exports = {
     },
     extend: {
       colors: {
-        menu_collapse: "#E0E7F0",
-        menu_active: "#D3E2FD",
+        login: " #FB1A20",
+        button_sso: "#3F3F46",
         nav: "#F7F8FC",
-        "bubble-gum": "#ff77e9",
-        transparent: "transparent",
-        current: "currentColor",
-        url: "#0B8AEF",
-        // my colors end
+        menu_collapse: "#E6E7E9",
+        menu_active: "#D3E2FD",
+        url: "#1099FE",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
