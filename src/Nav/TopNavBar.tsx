@@ -55,10 +55,13 @@ const TopNavBar: React.FC = () => {
         >
           <div>{collapsed ? <FiMenu /> : <FiX />}</div>
         </div>
-        <div>
+        <div className="flex">
           <Link to="/">
             <img src={Logo} alt="Logo" className="w-28" />
           </Link>
+          <span className="text-red-500 font-bold inline-block mt-3 tracking-tighter">
+            Advanced Controls
+          </span>
         </div>
       </div>
       {/* Right side  */}
