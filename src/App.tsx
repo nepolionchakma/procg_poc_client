@@ -3,8 +3,8 @@ import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./Root/Root";
 import Alerts from "./Pages/Top/Alerts";
-import Task from "./Pages/Top/Task";
-import Notification from "./Pages/Top/Notification";
+import Task from "./Pages/Top/Tasks";
+import Notification from "./Pages/Top/Notifications";
 import Home from "./Pages/Top/Home";
 import Risk_Management from "./Pages/Left/Risk_Management";
 import Control_Management from "./Pages/Left/Control_Management";
@@ -12,6 +12,7 @@ import Issue_Management from "./Pages/Left/Issue_Management";
 import Setup_and_Administration from "./Pages/Left/Setup_and_Administration";
 import Result_Management from "./Pages/Left/Result_Management";
 import Continuous_Control_Management from "./Pages/Left/Continuous_Control_Management";
+import LogIn from "./Pages/LogIn/LogIn";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
         element: <Setup_and_Administration />,
       },
     ],
+  },
+  {
+    path: "login",
+    element: <LogIn />,
   },
 ]);
 const App = () => {
