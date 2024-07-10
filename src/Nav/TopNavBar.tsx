@@ -59,7 +59,7 @@ const TopNavBar: React.FC = () => {
           <Link to="/">
             <img src={Logo} alt="Logo" className="w-28" />
           </Link>
-          <span className="text-red-500 font-bold inline-block mt-3 tracking-tighter">
+          <span className="text-url inline-block mt-3 tracking-tighter">
             Advanced Controls
           </span>
         </div>
