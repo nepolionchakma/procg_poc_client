@@ -17,7 +17,7 @@ interface NavGroupProps {
   toggleGroup: (groupId: number) => void;
   activeGroup: number | null;
   subMenuActiveValue: string;
-  path:string;
+  path: string;
 }
 const SideMenu: React.FC<NavGroupProps> = ({
   id,
@@ -36,7 +36,7 @@ const SideMenu: React.FC<NavGroupProps> = ({
       <div
         onClick={() => toggleGroup(id)}
         className={`border-b border-slate-400 border-dashed relative cursor-pointer duration-300 ${
-          subMenuActiveValue === label ? "bg-menu_active" : " bg-slate-50"
+          subMenuActiveValue === label && "bg-menu_active"
         }`}
       >
         <span
@@ -45,6 +45,7 @@ const SideMenu: React.FC<NavGroupProps> = ({
           }`}
         />
         <div
+          // Open menu color
           className={`flex gap-2 items-center justify-between p-4 ${
             isOpen && "bg-slate-200"
           }`}
@@ -83,7 +84,8 @@ const SideMenu: React.FC<NavGroupProps> = ({
                   key={item.id}
                   {...item}
                   collapsed={collapsed}
-                  path={path} />
+                  path={path}
+                />
               ))}
             </div>
             {/* ractangle */}

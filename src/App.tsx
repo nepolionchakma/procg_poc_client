@@ -13,6 +13,9 @@ import Setup_and_Administration from "./Pages/Left/Setup_and_Administration";
 import Result_Management from "./Pages/Left/Result_Management";
 import Continuous_Control_Management from "./Pages/Left/Continuous_Control_Management";
 import LogIn from "./Pages/LogIn/LogIn";
+import Profile from "./Pages/Top/Profile";
+import Security from "./Pages/Top/Security";
+import Settings from "./Pages/Top/Settings";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +37,18 @@ const router = createBrowserRouter([
       {
         path: "/notifications",
         element: <Notification />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/security",
+        element: <Security />,
+      },
+      {
+        path: "/settings",
+        element: <Settings />,
       },
       {
         path: "/finance/risk-management",

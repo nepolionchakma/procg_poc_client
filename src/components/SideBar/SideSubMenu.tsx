@@ -16,10 +16,15 @@ const SideSubMenu: React.FC<NavItemProps> = ({
   collapsed,
   path,
 }) => {
+  const handleStopPropagation = (e: React.MouseEvent) => {
+    if (!collapsed) {
+      e.stopPropagation();
+    }
+  };
   return (
     // hover submenu item
     <li
-      onClick={(e) => e.stopPropagation()}
+      onClick={handleStopPropagation}
       className={`p-1 transition-all duration-300 border border-slate-50 rounded-xl  ${
         collapsed
           ? "flex items-center w-[310px] hover:bg-slate-50 "

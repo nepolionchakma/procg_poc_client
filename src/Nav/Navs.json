@@ -88,22 +88,26 @@
     {
       "id": 0,
       "name": "Profile",
-      "icon": "fa-user"
+      "icon": "fa-user",
+      "link": "/profile"
     },
     {
       "id": 1,
       "name": "Security",
-      "icon": "fa-shield-halved"
+      "icon": "fa-shield-halved",
+      "link": "/security"
     },
     {
       "id": 2,
       "name": "Settings",
-      "icon": "fa-gear"
+      "icon": "fa-gear",
+      "link": "/settings"
     },
     {
       "id": 3,
       "name": "Logout",
-      "icon": "fa-right-from-bracket"
+      "icon": "fa-right-from-bracket",
+      "link": "#"
     }
   ]
 }

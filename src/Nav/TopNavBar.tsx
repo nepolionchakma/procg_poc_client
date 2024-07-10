@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Logo from "../../public/Top_Nav_Icon/logo.png";
 import Profilea from "../../public/Top_Nav_Icon/Profile.svg";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -17,6 +17,7 @@ interface IProfile {
   id: number;
   name: string;
   icon: React.ImgHTMLAttributes<HTMLImageElement> | string | React.ReactNode;
+  link: string;
 }
 
 const TopNavBar: React.FC = () => {
@@ -24,6 +25,8 @@ const TopNavBar: React.FC = () => {
   const [isOpenProfile, setIsOpenProfile] = useState<boolean>(false);
   const navs: INav[] = TopNav;
   const profile: IProfile[] = Profile;
+  const location = useLocation();
+  const path = location.pathname;
 
   useEffect(() => {
     function stringToBoolean(value: string | null): boolean {
@@ -103,15 +106,18 @@ const TopNavBar: React.FC = () => {
             <div className="border-l-[15px] border-l-transparent border-b-[25px] border-b-menu_active border-r-[15px] border-r-transparent absolute right-3 -top-4 duration-500 transition-transform" />
 
             {profile.map((p) => (
-              <div
+              <NavLink
+                to={p.link}
                 key={p.id}
-                className="flex gap-3 p-3 hover:bg-menu_collapse border cursor-pointer rounded-xl"
+                className={`${
+                  path === p.link && "text-red-500"
+                } flex gap-3 p-3 hover:bg-menu_collapse border cursor-pointer rounded-xl`}
               >
                 <div>
                   <i className={`fa-solid ${p.icon}`}></i>
                 </div>
                 <span>{p.name}</span>
-              </div>
+              </NavLink>
             ))}
           </div>
         )}
