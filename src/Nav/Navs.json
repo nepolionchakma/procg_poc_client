@@ -53,7 +53,7 @@
           "id": 0,
           "name": "Setup and Administration",
           "icon": "https://procg-poc-nepo.netlify.app/Left_Nav_Icon/Setup%20and%20Administration.png",
-          "link": "tools/setup-and-administration"
+          "link": "/tools/setup-and-administration"
         }
       ]
     }
