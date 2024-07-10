@@ -6,6 +6,7 @@ interface NavItemProps {
   icon: string;
   link: string;
   collapsed: boolean;
+  path: string;
 }
 
 const SideSubMenu: React.FC<NavItemProps> = ({
@@ -13,6 +14,7 @@ const SideSubMenu: React.FC<NavItemProps> = ({
   icon,
   link,
   collapsed,
+  path,
 }) => {
   return (
     // hover submenu item
@@ -22,7 +24,8 @@ const SideSubMenu: React.FC<NavItemProps> = ({
         collapsed
           ? "flex items-center w-[310px] hover:bg-slate-50 "
           : "pl-8 hover:bg-menu_collapse "
-      }`}
+      }
+      ${path === link && "text-red-600"}`}
     >
       <NavLink to={link} className="flex items-center p-2">
         <img src={icon} alt={name} className="w-4 h-4 mr-2" />

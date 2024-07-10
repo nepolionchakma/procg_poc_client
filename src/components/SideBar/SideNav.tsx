@@ -111,6 +111,7 @@ const SideNav: React.FC = () => {
             toggleGroup={toggleGroup}
             activeGroup={activeGroup}
             subMenuActiveValue={subMenuActiveValue}
+            path={path}
           />
         ))}
       </ul>

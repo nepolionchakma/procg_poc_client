@@ -17,6 +17,7 @@ interface NavGroupProps {
   toggleGroup: (groupId: number) => void;
   activeGroup: number | null;
   subMenuActiveValue: string;
+  path:string;
 }
 const SideMenu: React.FC<NavGroupProps> = ({
   id,
@@ -28,6 +29,7 @@ const SideMenu: React.FC<NavGroupProps> = ({
   toggleGroup,
   activeGroup,
   subMenuActiveValue,
+  path,
 }) => {
   return (
     <>
@@ -77,7 +79,11 @@ const SideMenu: React.FC<NavGroupProps> = ({
           >
             <div className="flex flex-col gap-2 p-1">
               {inNavs.map((item) => (
-                <SideSubMenu key={item.id} {...item} collapsed={collapsed} />
+                <SideSubMenu
+                  key={item.id}
+                  {...item}
+                  collapsed={collapsed}
+                  path={path} />
               ))}
             </div>
             {/* ractangle */}
