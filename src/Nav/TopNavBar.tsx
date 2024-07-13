@@ -1,10 +1,11 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
-import Logo from "../../public/Top_Nav_Icon/logo.png";
-import Profilea from "../../public/Top_Nav_Icon/Profile.svg";
+import Logo from "/Top_Nav_Icon/logo.png";
+import Profilea from "/Top_Nav_Icon/Profile.svg";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useNavContext } from "../Context/NavContext";
 import { useEffect, useState } from "react";
 import { TopNav, Profile } from "./Navs.json";
+import { useAuthContext } from "@/Context/Authcontext";
 
 interface INav {
   id: number;
@@ -22,6 +23,7 @@ interface IProfile {
 
 const TopNavBar: React.FC = () => {
   const { collapsed, setCollapsed } = useNavContext();
+  const { setAccess_token } = useAuthContext();
   const [isOpenProfile, setIsOpenProfile] = useState<boolean>(false);
   const navs: INav[] = TopNav;
   const profile: IProfile[] = Profile;
@@ -47,7 +49,10 @@ const TopNavBar: React.FC = () => {
   const handleProfile = () => {
     setIsOpenProfile(!isOpenProfile);
   };
-
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    setAccess_token("");
+  };
   return (
     <div className="flex justify-between px-5 py-2 border shadow-lg bg-nav sticky top-0 z-50">
       {/* Left side  */}
@@ -108,6 +113,7 @@ const TopNavBar: React.FC = () => {
             {profile.map((p) => (
               <NavLink
                 to={p.link}
+                onClick={p.name === "Logout" ? handleLogout : undefined}
                 key={p.id}
                 className={`${
                   path === p.link && "text-red-500"

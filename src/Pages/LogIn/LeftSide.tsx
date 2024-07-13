@@ -1,4 +1,4 @@
-import LogInLeftImage from "../../../public/LogIn/LogInLeft.svg";
+import LogInLeftImage from "/LogIn/LogInLeft.svg";
 
 const LeftSide = () => {
   return (

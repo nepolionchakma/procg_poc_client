@@ -94,7 +94,7 @@ const SideNav: React.FC = () => {
   return (
     <div
       ref={menuRef}
-      className={` transition-all duration-500 bg-nav h-screen ${
+      className={` transition-all duration-500 bg-nav h-[94vh] ${
         collapsed ? "w-[73px] " : "w-72 overflow-auto"
       }`}
     >

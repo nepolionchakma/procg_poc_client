@@ -1,9 +1,23 @@
 import { Button } from "../../components/ui/button";
 
-import logo from "../../../public/Top_Nav_Icon/logo.png";
-import language from "../../../public/LogIn/language.svg";
-import down_arrow from "../../../public/LogIn/down_arrow.svg";
-const RightSide = () => {
+import logo from "/Top_Nav_Icon/logo.png";
+import language from "/LogIn/language.svg";
+import down_arrow from "/LogIn/down_arrow.svg";
+import { useAuthContext } from "@/Context/Authcontext";
+import { useState } from "react";
+const RightSide: React.FC = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const { login } = useAuthContext();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await login(email, password);
+    } catch (error: any) {
+      console.error("login error", error.message);
+    }
+  };
   return (
     <div>
       <div className="p-4 flex flex-col gap-3 w-[448px] border">
@@ -18,7 +32,7 @@ const RightSide = () => {
           </div>
         </div>
         <div className=" ">
-          <form className="flex flex-col gap-3">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <div className="flex flex-col gap-1">
               <label className="text-slate-500 text-sm" htmlFor="email">
                 Email address
@@ -28,6 +42,7 @@ const RightSide = () => {
                 type="email"
                 name="email"
                 id="email"
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter mail address"
                 className="py-2 px-4 rounded-md text-sm border"
               />
@@ -40,6 +55,7 @@ const RightSide = () => {
                 type="password"
                 name="password"
                 id="password"
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter password"
                 className="py-2 px-4 rounded-md text-sm border"
               />
@@ -51,11 +67,13 @@ const RightSide = () => {
               </label>
             </div>
             <div className="flex gap-4 text-sm">
-              <input type="checkbox" name="" id="" />
-              <label htmlFor="">Remember me</label>
+              <input type="checkbox" name="remember" id="remember" />
+              <label htmlFor="remember">Remember me</label>
             </div>
             <div>
-              <Button className="w-full bg-login">Login</Button>
+              <Button type="submit" className="w-full bg-login">
+                Login
+              </Button>
               <div className="flex items-center my-2">
                 <div className="flex-grow border-t border-gray-300"></div>
                 <span className="mx-4 text-gray-500 text-sm">OR</span>
