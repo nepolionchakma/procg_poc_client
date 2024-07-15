@@ -53,7 +53,7 @@ const TestBar: React.FC = () => {
 
   return (
     <div
-      className={`h-full   text-white transition-all duration-300 bg-menu_active ${
+      className={`h-full   text-white transition-all duration-300 bg-sky-200 ${
         collapsed ? "w-28" : "w-64"
       }`}
     >

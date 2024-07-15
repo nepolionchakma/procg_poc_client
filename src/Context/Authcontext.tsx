@@ -1,20 +1,18 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { json } from "stream/consumers";
+import { createContext, ReactNode, useContext, useState } from "react";
+import { ThemeContextProvider } from "./ThemeContext";
 
 interface IAuthProviderProps {
   children: ReactNode;
 }
 interface IAuthTypes {
   login: (email: string, password: string) => void;
-  access_token: string;
-  setAccess_token: React.Dispatch<React.SetStateAction<string>>;
+  logout: () => void;
+  access_token: string | null;
+  setAccess_token: React.Dispatch<React.SetStateAction<string | null>>;
   isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  error: string;
+  setError: React.Dispatch<React.SetStateAction<string>>;
 }
 export interface IUserData {
   user_id: number;
@@ -30,9 +28,14 @@ export const useAuthContext = () => {
   return authconsumer;
 };
 export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
-  const [access_token, setAccess_token] = useState<string>("");
+  const [access_token, setAccess_token] = useState<string | null>(
+    localStorage.getItem("access_token")
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  // login
   const login = async (email: string, password: string) => {
+    setError("");
     setIsLoading(true);
     try {
       const res = await fetch("http://localhost:2333/login", {
@@ -48,14 +51,36 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
           JSON.stringify(user_res_data.access_token)
         );
         setIsLoading(false);
+      } else if (res.status === 404) {
+        setError("Invalid Email");
+        setIsLoading(false);
       } else if (res.status === 408) {
-        console.log("Invalid Credential.");
+        setError("Invalid Credential");
+        setIsLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      setError("Sorry, Something wrong in Database");
+      setIsLoading(false);
     }
   };
-  console.log(access_token, "access_token");
-  const value = { login, access_token, setAccess_token, isLoading };
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  // logout
+  const logout = () => {
+    localStorage.removeItem("access_token");
+    setAccess_token("");
+  };
+  const value = {
+    login,
+    logout,
+    access_token,
+    setAccess_token,
+    isLoading,
+    setIsLoading,
+    error,
+    setError,
+  };
+  return (
+    <AuthContext.Provider value={value}>
+      <ThemeContextProvider>{children}</ThemeContextProvider>
+    </AuthContext.Provider>
+  );
 };

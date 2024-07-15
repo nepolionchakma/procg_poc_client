@@ -6,6 +6,14 @@ import { useNavContext } from "../Context/NavContext";
 import { useEffect, useState } from "react";
 import { TopNav, Profile } from "./Navs.json";
 import { useAuthContext } from "@/Context/Authcontext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface INav {
   id: number;
@@ -23,7 +31,7 @@ interface IProfile {
 
 const TopNavBar: React.FC = () => {
   const { collapsed, setCollapsed } = useNavContext();
-  const { setAccess_token } = useAuthContext();
+  const { setAccess_token, logout } = useAuthContext();
   const [isOpenProfile, setIsOpenProfile] = useState<boolean>(false);
   const navs: INav[] = TopNav;
   const profile: IProfile[] = Profile;
@@ -49,10 +57,7 @@ const TopNavBar: React.FC = () => {
   const handleProfile = () => {
     setIsOpenProfile(!isOpenProfile);
   };
-  const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    setAccess_token("");
-  };
+
   return (
     <div className="flex justify-between px-5 py-2 border shadow-lg bg-nav sticky top-0 z-50">
       {/* Left side  */}
@@ -90,46 +95,80 @@ const TopNavBar: React.FC = () => {
             </NavLink>
           </div>
         ))}
-
-        {/* User Profile  */}
-        <div className="relative">
-          <img
-            className="cursor-pointer"
-            src={Profilea}
-            alt="profile"
-            onClick={handleProfile}
-          />
-        </div>
-        {isOpenProfile && (
-          <div className="w-48 bg-menu_active absolute right-2 top-14 rounded flex flex-col pb-4 duration-500 p-4 gap-2 z-50">
-            <div className="flex justify-end px-2">
-              <i
-                onClick={() => setIsOpenProfile(false)}
-                className="fa-solid fa-xmark cursor-pointer rounded-full my-2"
-              ></i>
-            </div>
-            <div className="border-l-[15px] border-l-transparent border-b-[25px] border-b-menu_active border-r-[15px] border-r-transparent absolute right-3 -top-4 duration-500 transition-transform" />
-
+        <DropdownMenu>
+          <DropdownMenuTrigger className="relative">
+            <img
+              className="cursor-pointer"
+              src={Profilea}
+              alt="profile"
+              onClick={handleProfile}
+            />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="mr-2">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <div className="border-l-[15px] border-l-transparent border-b-[25px] border-b-white border-r-[15px] border-r-transparent absolute right-6 -top-4 duration-500 transition-transform border" />
             {profile.map((p) => (
-              <NavLink
-                to={p.link}
-                onClick={p.name === "Logout" ? handleLogout : undefined}
-                key={p.id}
-                className={`${
-                  path === p.link && "text-red-500"
-                } flex gap-3 p-3 hover:bg-menu_collapse border cursor-pointer rounded-xl`}
-              >
-                <div>
-                  <i className={`fa-solid ${p.icon}`}></i>
-                </div>
-                <span>{p.name}</span>
-              </NavLink>
+              <DropdownMenuItem key={p.id}>
+                <NavLink
+                  to={p.link}
+                  onClick={p.name === "Logout" ? logout : undefined}
+                  className={`${
+                    path === p.link && "text-red-500"
+                  } flex gap-3 p-3 w-48 hover:bg-menu_collapse border cursor-pointer rounded-xl`}
+                >
+                  <div>
+                    <i className={`fa-solid ${p.icon}`}></i>
+                  </div>
+                  <span>{p.name}</span>
+                </NavLink>
+              </DropdownMenuItem>
             ))}
-          </div>
-        )}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   );
 };
 
 export default TopNavBar;
+//  {
+//    /* User Profile  */
+//  }
+//  <div className="relative">
+//    <img
+//      className="cursor-pointer"
+//      src={Profilea}
+//      alt="profile"
+//      onClick={handleProfile}
+//    />
+//  </div>;
+//  {
+//    isOpenProfile && (
+//      <div className="w-48 bg-menu_active absolute right-2 top-14 rounded flex flex-col pb-4 duration-500 p-4 gap-2 z-50">
+//        <div className="flex justify-end px-2">
+//          <i
+//            onClick={() => setIsOpenProfile(false)}
+//            className="fa-solid fa-xmark cursor-pointer rounded-full my-2"
+//          ></i>
+//        </div>
+//        <div className="border-l-[15px] border-l-transparent border-b-[25px] border-b-menu_active border-r-[15px] border-r-transparent absolute right-3 -top-4 duration-500 transition-transform" />
+
+//        {profile.map((p) => (
+//          <NavLink
+//            to={p.link}
+//            onClick={p.name === "Logout" ? logout : undefined}
+//            key={p.id}
+//            className={`${
+//              path === p.link && "text-red-500"
+//            } flex gap-3 p-3 hover:bg-menu_collapse border cursor-pointer rounded-xl`}
+//          >
+//            <div>
+//              <i className={`fa-solid ${p.icon}`}></i>
+//            </div>
+//            <span>{p.name}</span>
+//          </NavLink>
+//        ))}
+//      </div>
+//    );
+//  }

@@ -8,6 +8,7 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
+  darkMode: "class",
   theme: {
     container: {
       center: true,
@@ -22,7 +23,7 @@ module.exports = {
         button_sso: "#3F3F46",
         nav: "#F7F8FC",
         menu_collapse: "#E6E7E9",
-        menu_active: "#D3E2FD",
+        menu_active: "#bfdbfe",
         url: "#1099FE",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

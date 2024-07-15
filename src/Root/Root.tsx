@@ -1,22 +1,19 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Bottom from "../HomeView/Bottom";
 import Top from "../HomeView/Top";
 import { useAuthContext } from "@/Context/Authcontext";
-import { tracingChannel } from "diagnostics_channel";
 import LogIn from "@/Pages/LogIn/LogIn";
+import IsLoading from "@/components/Loading/IsLoading";
 
 const Root = () => {
-  const { access_token, setAccess_token, isLoading } = useAuthContext();
-  useEffect(() => {
-    const storeData = localStorage.getItem("access_token");
-    setAccess_token(storeData as string);
-  }, []);
-
-  if (access_token) {
+  const { access_token, isLoading } = useAuthContext();
+  const [useThemeMode, setUseThemeMode] = useState("light");
+  if (isLoading && !access_token) return <IsLoading />;
+  if (access_token && !isLoading)
     return (
       <main>
         {/* Home View  */}
-        <div className="flex flex-col">
+        <div className="flex flex-col  ">
           {/* Top  */}
           <Top />
           {/* Bottom  */}
@@ -24,8 +21,6 @@ const Root = () => {
         </div>
       </main>
     );
-  }
-
-  return <LogIn />;
+  if (!isLoading && !access_token) return <LogIn />;
 };
 export default Root;

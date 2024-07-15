@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Breadcurmb from "../components/Breadcrums/Breadcurmb";
-import SideNav from "../components/SideBar/SideNav";
+import SideNav from "../Nav/SideBar/SideNav";
 
 const Bottom = () => {
   return (

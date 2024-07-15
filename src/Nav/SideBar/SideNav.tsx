@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import navData from "../../Nav/Navs.json";
+import navData from "../Navs.json";
 import SideMenu from "./SideMenu";
 import { useNavContext } from "../../Context/NavContext";
 import { useLocation } from "react-router-dom";
+import { useThemeContext } from "@/Context/ThemeContext";
 
 interface NavItem {
   id: number;
@@ -25,6 +26,7 @@ const SideNav: React.FC = () => {
   const location = useLocation();
   const path = location.pathname;
   const { LeftNav } = navData;
+  const { themeMode, darkTheme, lightTheme } = useThemeContext();
 
   //Toggle Collapse
   const toggleGroup = (groupId: number) => {
@@ -91,10 +93,19 @@ const SideNav: React.FC = () => {
   }, [openGroups]);
   // close any menu end
 
+  //Theme Mode
+  const handleThemeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const modeStatus = e.currentTarget.checked;
+    if (modeStatus) {
+      darkTheme();
+    } else {
+      lightTheme();
+    }
+  };
   return (
     <div
       ref={menuRef}
-      className={` transition-all duration-500 bg-nav h-[94vh] ${
+      className={`flex flex-col justify-between transition-all duration-500 bg-nav h-[92vh] ${
         collapsed ? "w-[73px] " : "w-72 overflow-auto"
       }`}
     >
@@ -115,6 +126,16 @@ const SideNav: React.FC = () => {
           />
         ))}
       </ul>
+      <div className="p-3">
+        <input
+          hidden
+          type="checkbox"
+          name=""
+          id=""
+          onChange={handleThemeChange}
+          checked={themeMode === "dark"}
+        />
+      </div>
     </div>
   );
 };
