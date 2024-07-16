@@ -16,6 +16,7 @@ import LogIn from "./Pages/LogIn/LogIn";
 import Profile from "./Pages/Top/Profile";
 import Security from "./Pages/Top/Security";
 import Settings from "./Pages/Top/Settings";
+import AddUser from "./Pages/AddUser";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
       {
         path: "/tools/setup-and-administration",
         element: <Setup_and_Administration />,
+      },
+      {
+        path: "/add-user",
+        element: <AddUser />,
       },
     ],
   },

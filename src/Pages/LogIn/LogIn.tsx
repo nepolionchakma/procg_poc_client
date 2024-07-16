@@ -9,7 +9,7 @@ const LogIn = () => {
         <div className="flex items-center justify-center px-[174px]">
           <LeftSide />
         </div>
-        <div className="w-[400px] flex items-center justify-center ">
+        <div className="w-[400px] flex items-center justify-center">
           <RightSide />
         </div>
       </div>

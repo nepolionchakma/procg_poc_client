@@ -32,7 +32,7 @@ const SideSubMenu: React.FC<NavItemProps> = ({
       }
       ${path === link && "text-red-600"}`}
     >
-      <NavLink to={link} className="flex items-center p-2">
+      <NavLink to={link} className="flex items-center p-2 text-xs">
         <img src={icon} alt={name} className="w-4 h-4 mr-2" />
         <span>{name}</span>
         {/* {collapsed && <span>{name}</span>} */}

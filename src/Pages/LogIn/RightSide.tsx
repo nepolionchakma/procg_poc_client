@@ -24,7 +24,7 @@ const RightSide: React.FC = () => {
   };
   return (
     <div>
-      <div className="p-4 flex flex-col gap-3 border">
+      <div className="p-4 flex flex-col gap-3 border shadow-2xl rounded-lg hover:shadow-login duration-700">
         {/* form stsrt */}
         <div className="flex flex-col gap-2 ">
           <img className="w-[100px]" src={logo} alt="Logo" />

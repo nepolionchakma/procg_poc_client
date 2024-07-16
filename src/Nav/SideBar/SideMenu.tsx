@@ -48,8 +48,8 @@ const SideMenu: React.FC<NavGroupProps> = ({
     <>
       <div
         onClick={() => toggleGroup(id)}
-        className={`border-b border-slate-600 border-dashed relative cursor-pointer duration-300 ${
-          subMenuActiveValue === label ? "bg-menu_active" : " bg-slate-50"
+        className={`border-b border-slate-400 border-dashed relative cursor-pointer duration-300 hover:bg-slate-200 ${
+          subMenuActiveValue === label ? "bg-menu_active" : " bg-slate-100"
         }`}
       >
         <span

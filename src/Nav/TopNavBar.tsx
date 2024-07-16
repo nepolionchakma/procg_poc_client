@@ -84,7 +84,7 @@ const TopNavBar: React.FC = () => {
             <NavLink to={nav.link}>
               {({ isActive, isPending }) => (
                 <div
-                  className={`flex items-center justify-center gap-3 px-5 py-[5px] rounded-md duration-300 ${
+                  className={`flex items-center justify-center gap-3 px-5 py-[5px] rounded-md duration-300 hover:bg-slate-200 ${
                     isActive ? "bg-menu_active" : ""
                   } ${isPending ? "slide" : ""}`}
                 >
