@@ -1,5 +1,6 @@
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import SideSubMenu from "./SideSubMenu";
+import { useEffect, useRef, useState } from "react";
 interface NavItem {
   id: number;
   name: string;
@@ -31,12 +32,24 @@ const SideMenu: React.FC<NavGroupProps> = ({
   subMenuActiveValue,
   path,
 }) => {
+  const [subMenuHeight, setSubMenuHeight] = useState<string | number>("0px");
+  const subMenuref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (isOpen || (!collapsed && activeGroup === id)) {
+      setSubMenuHeight(subMenuref.current?.scrollHeight ?? "auto");
+    } else if (isOpen || collapsed) {
+      setSubMenuHeight(subMenuref.current?.scrollHeight ?? "auto");
+    } else if (!isOpen) {
+      setSubMenuHeight("0px");
+    }
+  }, [isOpen]);
+
   return (
     <>
       <div
         onClick={() => toggleGroup(id)}
-        className={`border-b border-slate-400 border-dashed relative cursor-pointer duration-300 ${
-          subMenuActiveValue === label && "bg-menu_active"
+        className={`border-b border-slate-600 border-dashed relative cursor-pointer duration-300 ${
+          subMenuActiveValue === label ? "bg-menu_active" : " bg-slate-50"
         }`}
       >
         <span
@@ -69,28 +82,38 @@ const SideMenu: React.FC<NavGroupProps> = ({
             </span>
           )}
         </div>
-        {(isOpen || (collapsed && activeGroup === id)) && (
-          <div
-            // background subMenu Item
-            className={`${
-              collapsed
-                ? "absolute left-24 top-1 p-2 bg-menu_collapse rounded shadow-2xl z-50"
-                : " bg-slate-50"
-            }`}
-          >
-            <div className="flex flex-col gap-2 p-1">
-              {inNavs.map((item) => (
-                <SideSubMenu
-                  key={item.id}
-                  {...item}
-                  collapsed={collapsed}
-                  path={path}
-                />
-              ))}
-            </div>
-            {/* ractangle */}
+        <div
+          ref={subMenuref}
+          style={{
+            height: isOpen ? subMenuHeight : "0px",
+            transitionDuration: isOpen ? ".5s" : ".5s",
+            overflow: "hidden",
+            backgroundColor: "#f8fafc",
+          }}
+        >
+          {(isOpen || (collapsed && activeGroup === id)) && (
             <div
-              className="
+              // background subMenu Item
+
+              className={` bg-menu_collapse   ${
+                collapsed
+                  ? "absolute left-24 top-1 p-2 bg-menu_collapse rounded shadow-2xl z-50"
+                  : " bg-slate-50"
+              }`}
+            >
+              <div className="flex flex-col gap-2 p-1">
+                {inNavs.map((item) => (
+                  <SideSubMenu
+                    key={item.id}
+                    {...item}
+                    collapsed={collapsed}
+                    path={path}
+                  />
+                ))}
+              </div>
+              {/* ractangle */}
+              <div
+                className="
               absolute -left-4 top-2
               border-t-[15px]
               border-t-transparent
@@ -99,9 +122,10 @@ const SideMenu: React.FC<NavGroupProps> = ({
               border-b-[15px]
               border-b-transparent
               duration-500 transition-transform"
-            />
-          </div>
-        )}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

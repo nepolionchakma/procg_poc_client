@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { ThemeContextProvider } from "./ThemeContext";
 
 interface IAuthProviderProps {
@@ -13,10 +19,13 @@ interface IAuthTypes {
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   error: string;
   setError: React.Dispatch<React.SetStateAction<string>>;
+  userName: string;
+  user_data: IUserData[];
 }
 export interface IUserData {
   user_id: number;
   user_name: string;
+  tenant_id: number;
   access_token: string;
 }
 export const AuthContext = createContext<IAuthTypes | null>(null);
@@ -28,11 +37,38 @@ export const useAuthContext = () => {
   return authconsumer;
 };
 export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
-  const [access_token, setAccess_token] = useState<string | null>(
-    localStorage.getItem("access_token")
-  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+
+  //---------------------------------
+  const [user_data, setUser_data] = useState<IUserData[]>([]);
+  useEffect(() => {
+    const storeData = localStorage.getItem("access_token");
+    if (storeData) {
+      try {
+        const userData: IUserData[] = JSON.parse(storeData);
+        setUser_data(userData);
+      } catch (error) {
+        console.error("Error parsing stored user data:", error);
+      }
+    }
+  }, []);
+  //get access token when open
+  const [access_token, setAccess_token] = useState<string | null>(() => {
+    const storeData = localStorage.getItem("access_token");
+    if (storeData) {
+      try {
+        const userData: IUserData = JSON.parse(storeData);
+        return userData.access_token;
+      } catch (error) {
+        console.error("Error parsing stored access token:", error);
+        return null;
+      }
+    }
+    return null;
+  });
+
   // login
   const login = async (email: string, password: string) => {
     setError("");
@@ -41,15 +77,14 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
       const res = await fetch("http://localhost:2333/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email, password: password }),
+        body: JSON.stringify({ email, password }),
       });
       if (res.ok) {
         const user_res_data: IUserData = await res.json();
         setAccess_token(user_res_data.access_token);
-        localStorage.setItem(
-          "access_token",
-          JSON.stringify(user_res_data.access_token)
-        );
+        setUserName(user_res_data.user_name);
+        //-----------------------------------
+        localStorage.setItem("access_token", JSON.stringify(user_res_data));
         setIsLoading(false);
       } else if (res.status === 404) {
         setError("Invalid Email");
@@ -59,14 +94,14 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
         setIsLoading(false);
       }
     } catch (error) {
-      setError("Sorry, Something wrong in Database");
+      setError("Sorry, Database isn't connected ");
       setIsLoading(false);
     }
   };
   // logout
   const logout = () => {
     localStorage.removeItem("access_token");
-    setAccess_token("");
+    setAccess_token(null);
   };
   const value = {
     login,
@@ -77,6 +112,8 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
     setIsLoading,
     error,
     setError,
+    userName,
+    user_data,
   };
   return (
     <AuthContext.Provider value={value}>

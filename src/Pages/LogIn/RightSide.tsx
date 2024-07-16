@@ -10,6 +10,7 @@ const RightSide: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { login, error, setError } = useAuthContext();
+  const [checked, setChecked] = useState<boolean>(true);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,7 +71,13 @@ const RightSide: React.FC = () => {
               </label>
             </div>
             <div className="flex gap-4 text-xs">
-              <input type="checkbox" name="remember" id="remember" />
+              <input
+                type="checkbox"
+                name="remember"
+                id="remember"
+                checked={checked}
+                onClick={() => setChecked(!checked)}
+              />
               <label htmlFor="remember">Remember me</label>
             </div>
             {error && (

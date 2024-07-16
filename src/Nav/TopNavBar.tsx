@@ -31,7 +31,7 @@ interface IProfile {
 
 const TopNavBar: React.FC = () => {
   const { collapsed, setCollapsed } = useNavContext();
-  const { setAccess_token, logout } = useAuthContext();
+  const { logout, userName } = useAuthContext();
   const [isOpenProfile, setIsOpenProfile] = useState<boolean>(false);
   const navs: INav[] = TopNav;
   const profile: IProfile[] = Profile;
@@ -97,15 +97,12 @@ const TopNavBar: React.FC = () => {
         ))}
         <DropdownMenu>
           <DropdownMenuTrigger className="relative">
-            <img
-              className="cursor-pointer"
-              src={Profilea}
-              alt="profile"
-              onClick={handleProfile}
-            />
+            <img className="cursor-pointer" src={Profilea} alt="profile" />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="mr-2">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel className="text-center">
+              {userName}
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <div className="border-l-[15px] border-l-transparent border-b-[25px] border-b-white border-r-[15px] border-r-transparent absolute right-6 -top-4 duration-500 transition-transform border" />
             {profile.map((p) => (
@@ -113,8 +110,8 @@ const TopNavBar: React.FC = () => {
                 <NavLink
                   to={p.link}
                   onClick={p.name === "Logout" ? logout : undefined}
-                  className={`${
-                    path === p.link && "text-red-500"
+                  className={` ${
+                    path === p.link && "text-login"
                   } flex gap-3 p-3 w-48 hover:bg-menu_collapse border cursor-pointer rounded-xl`}
                 >
                   <div>
