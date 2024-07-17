@@ -76,7 +76,12 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
     try {
       const res = await fetch("http://129.146.85.244:3000/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
+        },
         body: JSON.stringify({ email, password }),
       });
       if (res.ok) {
