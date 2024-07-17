@@ -76,14 +76,10 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
     try {
       const res = await fetch("http://129.146.85.244:3000/login", {
         method: "POST",
-        mode: "no-cors",
         headers: {
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
-          "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: email, password: password }),
       });
       if (res.ok) {
         const user_res_data: IUserData = await res.json();
