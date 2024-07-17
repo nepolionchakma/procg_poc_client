@@ -74,7 +74,7 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
     setError("");
     setIsLoading(true);
     try {
-      const res = await fetch("http://localhost:2333/login", {
+      const res = await fetch("http://129.146.85.244:3000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -93,7 +93,9 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
         setError("Invalid Credential");
         setIsLoading(false);
       }
+      console.log(res);
     } catch (error) {
+      console.log(error);
       setError("Sorry, Database isn't connected ");
       setIsLoading(false);
     }
