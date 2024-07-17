@@ -76,6 +76,7 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
     try {
       const res = await fetch("http://129.146.85.244:3000/login", {
         method: "POST",
+        mode: "no-cors",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
